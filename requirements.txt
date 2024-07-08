@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+openai==0.28
+numpy
+scipy
+sounddevice
+python-dotenv
