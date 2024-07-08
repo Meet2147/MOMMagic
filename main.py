@@ -30,7 +30,7 @@ def transcribe_audio(file_path):
             file=audio_file,
             response_format="text"
         )
-    return transcription["text"]
+    return transcription
 
 def generate_summary(transcript):
     prompt = (
