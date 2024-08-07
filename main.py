@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import openai
 import os
 from dotenv import load_dotenv
-from fastapi.middleware.cors import CORSMiddleware
+
 load_dotenv()
 
 # Get the OpenAI API key from environment variables
@@ -16,18 +16,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 app = FastAPI()
 
 
-origins = [
-    "http://localhost:3000",
-    # Add other origins if needed
-]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Mount the static files directory
 app.mount("/static", StaticFiles(directory="static"), name="static")
