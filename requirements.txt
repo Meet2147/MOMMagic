@@ -6,3 +6,5 @@ scipy
 sounddevice
 python-dotenv
 python-multipart
+pydub
+eyed3
