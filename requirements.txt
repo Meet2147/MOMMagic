@@ -8,3 +8,4 @@ python-dotenv
 python-multipart
 pydub
 eyed3
+math
