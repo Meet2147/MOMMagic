@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import eyed3
 import logging
 from pydub import AudioSegment
+import math
 
 # Load environment variables
 load_dotenv()
