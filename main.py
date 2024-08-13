@@ -147,6 +147,10 @@ async def process_audio(file: UploadFile = File(...)):
     with open(file_location, "wb") as f:
         f.write(await file.read())
 
+    # Ensure the WAV file is in 16-bit PCM format if necessary
+    if file_extension == '.wav':
+        file_location = ensure_pcm_wav(file_location)
+
     # Split the file if it's too large
     segments = split_audio(file_location, OVERLAP_SECONDS)
 
