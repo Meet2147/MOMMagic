@@ -33,6 +33,20 @@ class AudioResponse(BaseModel):
     summary: str
     tasks: str
 
+def ensure_pcm_wav(file_path):
+    """Ensure that the WAV file is in 16-bit PCM format."""
+    try:
+        with wave.open(file_path, 'rb') as wav_file:
+            if wav_file.getsampwidth() != 2:  # 16-bit PCM has a sample width of 2 bytes
+                raise wave.Error('Not a 16-bit PCM file')
+    except wave.Error:
+        # Convert to 16-bit PCM using pydub
+        audio = AudioSegment.from_file(file_path)
+        audio = audio.set_sample_width(2)  # Convert to 16-bit
+        audio.export(file_path, format="wav")
+        logging.info(f"Converted {file_path} to 16-bit PCM format.")
+    return file_path
+
 def calculate_segment_duration_and_num_segments(duration_seconds, overlap_seconds, max_size, bitrate_kbps):
     """Calculate the duration and number of segments for an audio file."""
     seconds_for_max_size = (max_size * 8 * 1024) / bitrate_kbps
